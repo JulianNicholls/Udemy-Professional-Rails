@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'unicorn'
+gem 'unicorn-rails'
 
 group :development, :test do
   gem 'byebug'
@@ -27,6 +28,10 @@ gem 'bootstrap-sass'
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'
+  gem 'guard'
+  gem 'minitest-reporters',   '1.0.5'
+  gem 'mini_backtrace',       '0.1.3'
+  gem 'guard-minitest',       '2.3.1'
 end
 
 group :production do
