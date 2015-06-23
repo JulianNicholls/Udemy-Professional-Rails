@@ -67,8 +67,10 @@ h2 {
 
 .footer {
     margin-top: 25px;
-    padding: 5px 0 0 15px;
-    border-top: 1px solid #eaeaea;
+    padding: 5px 0 5px 15px;
+    border-top: 1px solid #d8d8d8;
+    background-color: #e8e8e8;
+    color: #777;
 }
 
 .chef_info {
@@ -83,7 +85,7 @@ h2 {
     background-color: #ededed;
 }
 
-input, textarea, select, .uneditable_input {
+input, textarea, select, .uneditable-input {
     border: 1px solid #d2d2d2;
     border-radius: 5px;
     width: 100%;
