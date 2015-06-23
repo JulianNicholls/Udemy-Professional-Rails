@@ -9,8 +9,8 @@
       <h5><%= recipe.chef.name %></h5>
       </section>
     </div>
-    <div class="col-md-10 well">
-      <h4><%= link_to recipe.name, "#" %></h4>
+    <div class="col-md-8 well">
+      <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
       <p><%= recipe.summary %></p>
       <p>
         <span class="quiet"><small><%= time_ago_in_words recipe.created_at %> ago</small></span>
