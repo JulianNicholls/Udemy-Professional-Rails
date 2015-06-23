@@ -24,6 +24,8 @@ end
 # Project-specific from here
 
 gem 'bootstrap-sass'
+gem 'carrierwave', '0.10.0'
+gem 'mini_magick', '3.8.0'
 
 group :development, :test do
   gem 'sqlite3'
@@ -38,3 +40,4 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+

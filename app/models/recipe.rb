@@ -7,4 +7,6 @@ class Recipe < ActiveRecord::Base
   validates :summary, presence: true, length: { in: 10..150 }
   validates :description, presence: true, length: { in: 20..600 }
 
+  # mount_uploader :picture, PictureUploader
+
 end
