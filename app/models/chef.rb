@@ -3,6 +3,7 @@ class Chef < ActiveRecord::Base
   before_save { self.email.downcase! }
 
   has_many :recipes
+  has_many :likes
 
   validates :name, presence: true, length: { in: 3..40 }
 
