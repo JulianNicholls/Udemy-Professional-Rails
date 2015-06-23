@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-2">
       <section class="chef_info center">
-      <%= gravatar_for chef, size: 100 %>
+      <%= link_to gravatar_for(chef, size: 100), chef_path(chef) %>
       </section>
     </div>
     <div class="col-md-6 well">
