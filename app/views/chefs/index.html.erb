@@ -1,0 +1,15 @@
+<%= render 'shared/page_title', title: "Chef List" %>
+
+<% @chefs.each do |chef| %>
+  <div class="row">
+    <div class="col-md-2">
+      <section class="chef_info center">
+      <%= gravatar_for chef, size: 100 %>
+      </section>
+    </div>
+    <div class="col-md-6 well">
+      <h4><%= link_to chef.name, chef_path(chef) %></h4>
+    </div>
+  </div>
+  <hr/>
+<% end %>
