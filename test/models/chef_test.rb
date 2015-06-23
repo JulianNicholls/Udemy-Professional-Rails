@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ChefTest < ActiveSupport::TestCase
   def setup
-    @chef = Chef.new(name: "John Ffolkes-Smyth", email: "john@cheffy.com")
+    @chef = Chef.new(name: "John Ffolkes-Smyth", email: "john@cheffy.com",
+                     password: "foobar", password_confirmation: "foobar")
   end
 
   test "Chef should be valid" do
@@ -61,5 +62,17 @@ class ChefTest < ActiveSupport::TestCase
       @chef.email = addr
       assert_not @chef.valid?, "#{addr.inspect} should NOT be valid"
     end
+  end
+
+  test "password confirmation must be present" do
+    @chef.password_confirmation = ""
+
+    assert_not @chef.valid?
+  end
+
+  test "password confirmation must match" do
+    @chef.password_confirmation = "notamatch"
+
+    assert_not @chef.valid?
   end
 end

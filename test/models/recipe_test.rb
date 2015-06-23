@@ -2,13 +2,14 @@ require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
   def setup
-    chef = Chef.create(name: "Bob", email: "bob@example.com")
+    chef = Chef.create(name: "Bob", email: "bob@example.com", password: "foobar",
+                       password_confirmation: 'foobar')
     @recipe = chef.recipes.build(name: "Spicy Meatballs", summary: "Now, that's a spicy meatball!",
-                         description: "Meatballs with spice")
+                         description: "Meatballs with spice", chef: chef)
   end
 
   test "Recipe should be valid" do
-    assert @recipe.valid?
+    assert @recipe.valid?, @recipe.errors.full_messages
   end
 
   test "chef_id must be present" do
@@ -28,7 +29,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @recipe.valid?
 
     @recipe.name = "This is plenty long enough"
-    assert @recipe.valid?
+    assert @recipe.valid?, @recipe.errors
 
     @recipe.name = "a" * 101
     assert_not @recipe.valid?
