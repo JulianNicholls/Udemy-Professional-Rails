@@ -17,8 +17,8 @@
         <% if recipe.created_at == recipe.updated_at %>
           <span class="quiet"><small>Created <%= time_ago_in_words recipe.created_at %> ago</small></span>
         <% else %>
-          <span class="quiet"><small>Created: <%= time_ago_in_words recipe.created_at %> ago,</small></span>
-          <span class="quiet"><small>last updated: <%= time_ago_in_words recipe.updated_at %> ago</small></span>
+          <span class="quiet"><small>Created <%= time_ago_in_words recipe.created_at %> ago,</small></span>
+          <span class="quiet"><small>last updated <%= time_ago_in_words recipe.updated_at %> ago</small></span>
         <% end %>
       </p>
       <div class="pull-right">
