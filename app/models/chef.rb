@@ -1,11 +1,11 @@
 class Chef < ActiveRecord::Base
 
-  before_save { self.email.downcase! }
-
   has_many :recipes
   has_many :likes
 
   has_secure_password
+
+  before_save { self.email.downcase! }
 
   validates :name, presence: true, length: { in: 3..40 }
 
