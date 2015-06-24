@@ -19,4 +19,11 @@ module LoginsHelper
     session.delete :user_id
     @current_user = nil
   end
+
+  def require_user
+    unless logged_in?
+      flash[:danger] = "You must be logged in to perform that action"
+      redirect_to :back
+    end
+  end
 end

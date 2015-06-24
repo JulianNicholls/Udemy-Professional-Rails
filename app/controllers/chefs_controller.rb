@@ -1,11 +1,12 @@
 class ChefsController < ApplicationController
+  before_action :set_chef, only: [:show, :edit, :update]    # I'm not sure about this
+  before_action :require_same_user, only: [:edit, :update]
 
   def index
     @chefs = Chef.paginate(page: params[:page], per_page: 3)
   end
 
   def show
-    @chef = Chef.find params[:id]
     @recipes = @chef.recipes.paginate(page: params[:page], per_page: 3)
   end
 
@@ -26,12 +27,9 @@ class ChefsController < ApplicationController
   end
 
   def edit
-    @chef = Chef.find params[:id]
   end
 
   def update
-    @chef = Chef.find params[:id]
-
     if @chef.update chef_params
       flash[:success] = 'Your Profile was Updated Successfully'
       redirect_to @chef
@@ -44,5 +42,16 @@ class ChefsController < ApplicationController
 
     def chef_params
       params.require(:chef).permit :name, :email, :profile, :password, :password_confirmation
+    end
+
+    def set_chef
+      @chef = Chef.find params[:id]
+    end
+
+    def require_same_user
+      unless current_user? @chef
+        flash[:danger] = "You can only edit your own profile."
+        redirect_to root_path
+      end
     end
 end
