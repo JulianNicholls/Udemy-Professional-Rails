@@ -7,8 +7,17 @@
     <div class='nav-item'>
       <%= link_to 'Link 2', '#', class: 'btn btn-default btn-warning' %>
     </div>
-    <div class='nav-item'>
-      <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-default btn-warning' %>
-    </div>
+    <% if logged_in? %>
+      <div class='nav-item'>
+        <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-default btn-warning' %>
+      </div>
+      <div class='nav-item'>
+        <%= link_to 'Sign out', logout_path, method: :delete, class: 'btn btn-default btn-danger' %>
+      </div>
+    <% else %>
+      <div class='nav-item'>
+        <%= link_to 'Sign in', login_path, class: 'btn btn-default btn-warning' %>
+      </div>
+    <% end %>
   </div>
 </header>

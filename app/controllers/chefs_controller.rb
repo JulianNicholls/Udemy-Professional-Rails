@@ -18,7 +18,8 @@ class ChefsController < ApplicationController
 
     if @chef.save
       flash[:success] = "Your Account was Registered Successfully"
-      redirect_to chefs_path
+      session[:user_id] = @chef.id
+      redirect_to recipes_path
     else
       render :new
     end

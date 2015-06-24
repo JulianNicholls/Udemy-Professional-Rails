@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new recipe_params
-    @recipe.chef = Chef.find(2)
+    @recipe.chef = current_user
 
     if @recipe.save
       flash[:success] = "Your Recipe was Created Successfully"
@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
 
   def like
     recipe = Recipe.find params[:id]
-    like = Like.create(like: params[:like], recipe: recipe, chef: Chef.first)
+    like = Like.create(like: params[:like], recipe: recipe, chef: current_user)
 
     if like.valid?
       flash[:success] = "Your selection was successful"
