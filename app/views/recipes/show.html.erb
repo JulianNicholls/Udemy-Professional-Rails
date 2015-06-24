@@ -9,7 +9,9 @@
   </div>
 
   <div class="col-md-8">
-    <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: 'btn btn-success pull-right' %>
+    <% if current_user == @recipe.chef %>
+      <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: 'btn btn-success pull-right' %>
+    <% end %>
     <h3><%= @recipe.summary %></h3>
     <div class="show_recipe">
       <%= image_tag(@recipe.picture.url, class: 'gravatar') if @recipe.picture? %>
@@ -20,11 +22,19 @@
       </p>
       <%= simple_format(@recipe.description) %>
       <div class="pull-right">
-        <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
+        <% if logged_in? %>
+          <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i> <%= @recipe.thumbs_up %>
+          <% end %>
+        <% else %>
           <i class="glyphicon glyphicon-thumbs-up"></i> <%= @recipe.thumbs_up %>
         <% end %>
         &nbsp;&nbsp;
-        <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
+        <% if logged_in? %>
+          <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i> <%= @recipe.thumbs_down %>
+          <% end %>
+        <% else %>
           <i class="glyphicon glyphicon-thumbs-down"></i> <%= @recipe.thumbs_down %>
         <% end %>
       </div>

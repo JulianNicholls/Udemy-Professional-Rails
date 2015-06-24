@@ -22,11 +22,19 @@
         <% end %>
       </p>
       <div class="pull-right">
-        <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
+        <% if logged_in? %>
+          <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i> <%= recipe.thumbs_up %>
+          <% end %>
+        <% else %>
           <i class="glyphicon glyphicon-thumbs-up"></i> <%= recipe.thumbs_up %>
         <% end %>
         &nbsp;&nbsp;
-        <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+        <% if logged_in? %>
+          <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i> <%= recipe.thumbs_down %>
+          <% end %>
+        <% else %>
           <i class="glyphicon glyphicon-thumbs-down"></i> <%= recipe.thumbs_down %>
         <% end %>
       </div>
