@@ -15,10 +15,10 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.label :profile %>
+      <%= f.label :profile, 'Bio' %>
       <%= f.text_area :profile, rows: 10 %>
 
-      <%= f.submit(@chef.new_record? ? 'Sign Up' : 'Update', class: 'btn btn-success') %>
+      <%= f.submit(@chef.new_record? ? 'Register' : 'Update', class: 'btn btn-success') %>
     <% end %>
   </div>
 </div>

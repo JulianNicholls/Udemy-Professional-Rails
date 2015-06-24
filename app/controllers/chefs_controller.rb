@@ -1,7 +1,12 @@
 class ChefsController < ApplicationController
 
   def index
-    @chefs = Chef.all
+    @chefs = Chef.paginate(page: params[:page], per_page: 3)
+  end
+
+  def show
+    @chef = Chef.find params[:id]
+    @recipes = @chef.recipes.paginate(page: params[:page], per_page: 3)
   end
 
   def new
@@ -12,15 +17,26 @@ class ChefsController < ApplicationController
     @chef = Chef.new chef_params
 
     if @chef.save
-      flash[:success] = "Your Signup was Successful"
+      flash[:success] = "Your Account was Registered Successfully"
       redirect_to chefs_path
     else
       render :new
     end
   end
 
-  def show
+  def edit
+    @chef = Chef.find params[:id]
+  end
 
+  def update
+    @chef = Chef.find params[:id]
+
+    if @chef.update chef_params
+      flash[:success] = 'Your Profile was Updated Successfully'
+      redirect_to @chef
+    else
+      render :edit
+    end
   end
 
   private
@@ -28,5 +44,4 @@ class ChefsController < ApplicationController
     def chef_params
       params.require(:chef).permit :name, :email, :profile, :password, :password_confirmation
     end
-
 end
