@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :like]
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show, :like]
+  before_action :require_user_like, only: [:like]
   before_action :require_same_user, only: [:edit, :update]
 
   def index
@@ -54,11 +55,18 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit :name, :summary, :description, :picture
+      params.require(:recipe).permit :name, :summary, :description, :picture, style_ids: [], ingredient_ids: []
     end
 
     def set_recipe
       @recipe = Recipe.find params[:id]
+    end
+
+    def require_user_like
+      unless logged_in?
+        flash[:danger] = "You must be logged in to perform that action"
+        redirect_to :back
+      end
     end
 
     def require_same_user
