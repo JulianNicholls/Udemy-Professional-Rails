@@ -22,6 +22,8 @@
     <div class="col-md-6 well">
       <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
       <p><%= recipe.summary %></p>
+      <p>Style: <%= render recipe.styles %></p>
+      <p>Ingredients: <%= render recipe.ingredients %></p>
       <p>
         <% if recipe.created_at == recipe.updated_at %>
           <span class="quiet"><small>Created <%= time_ago_in_words recipe.created_at %> ago</small></span>
