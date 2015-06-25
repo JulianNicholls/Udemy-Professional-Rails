@@ -4,6 +4,12 @@ class Recipe < ActiveRecord::Base
 
   has_many :likes
 
+  has_many :recipe_styles
+  has_many :styles, through: :recipe_styles
+
+  has_many :recipe_ingredients
+  has_many :ingredients, through: :recipe_ingredients
+
   validates :chef_id, presence: true
   validates :name, presence: true, length: { in: 5..100 }
   validates :summary, presence: true, length: { in: 10..150 }
