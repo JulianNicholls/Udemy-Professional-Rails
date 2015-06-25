@@ -10,6 +10,10 @@
           <% Style.all.each do |style| %>
             <li><%= link_to style.name, style %></li>
           <% end %>
+          <% if logged_in? %>
+            <li class="divider"></li>
+            <li><%= link_to 'New Style', new_style_path %></li>
+          <% end %>
         </ul>
       </li>
     </ul>
@@ -21,6 +25,10 @@
         <ul class="dropdown-menu">
           <% Ingredient.all.each do |ingredient| %>
             <li><%= link_to ingredient.name, ingredient %></li>
+          <% end %>
+          <% if logged_in? %>
+            <li class="divider"></li>
+            <li><%= link_to 'New Ingredient', new_ingredient_path %></li>
           <% end %>
         </ul>
       </li>
