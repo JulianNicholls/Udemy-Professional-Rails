@@ -1,17 +1,35 @@
 <header class="navbar navbar-fixed-top navbar-default">
   <div class="container">
     <%= link_to 'Buffet Car', root_path, class: 'btn btn-lg btn-success', id: 'logo' %>
-    <div class='nav-item'>
-      <%= link_to 'Link 1', '#', class: 'btn btn-default btn-warning' %>
-    </div>
-    <div class='nav-item'>
-      <%= link_to 'Link 2', '#', class: 'btn btn-default btn-warning' %>
-    </div>
+    <ul class='nav-item'>
+      <li class="dropdown">
+        <%= link_to '#', class: 'btn btn-default btn-danger dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+        Recipe Styles <b class="caret"></b>
+        <% end %>
+        <ul class="dropdown-menu">
+          <% Style.all.each do |style| %>
+            <li><%= link_to style.name, style %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+    <ul class='nav-ul-item'>
+      <li class="dropdown">
+        <%= link_to '#', class: 'btn btn-default btn-danger dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+        Ingredients <b class="caret"></b>
+        <% end %>
+        <ul class="dropdown-menu">
+          <% Ingredient.all.each do |ingredient| %>
+            <li><%= link_to ingredient.name, ingredient %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
     <% if logged_in? %>
-      <div class='nav-item'>
+      <div class='nav-ul-item'>
         <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-default btn-warning' %>
       </div>
-      <ul class="nav-item">
+      <ul class="nav-ul-item">
         <li class="dropdown">
           <%= link_to '#', class: 'btn btn-default btn-danger dropdown-toggle', 'data-toggle' => 'dropdown' do %>
             <%= current_user.name %> <b class="caret"></b>
