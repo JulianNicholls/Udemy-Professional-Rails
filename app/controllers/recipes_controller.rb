@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @review = Review.new recipe_id: @recipe.id
   end
 
   def new

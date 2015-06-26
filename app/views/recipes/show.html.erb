@@ -41,4 +41,23 @@
   </div>
 </div>
 
+<!--  There will be a list of reviews here, but we'll need some first -->
+
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-md-8 well">
+      <h2>New Review</h2>
+      <%= form_for @review do |f| -%>
+        <%= f.hidden_field :recipe_id %>
+        <%= f.label :rating, "Rating" %>
+        <%= f.select :rating, [['Troll', 1], ['Dreadful', 2], ['Acceptable', 3],
+                               ['Exceeds Expectations', 4], ['Outstanding', 5]], { selected: 5 } %>
+        <%= f.label :body, "Comments" %>
+        <%= f.text_area :body, rows: 2 %>
+        <%= f.submit "Submit", class: 'btn btn-success' %>
+      <% end -%>
+    </div>
+  </div>
+<% end %>
+
 <h5><%= link_to 'Return to Recipes Listing', recipes_path, class: 'btn btn-warning btn-small' %></h5>
