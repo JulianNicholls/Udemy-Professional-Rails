@@ -9,7 +9,7 @@
   </div>
 
   <div class="col-md-8">
-    <% if current_user? @recipe.chef %>
+    <% if current_user?(@recipe.chef) || current_user.admin? %>
       <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: 'btn btn-success pull-right' %>
     <% end %>
     <h3><%= @recipe.summary %></h3>
