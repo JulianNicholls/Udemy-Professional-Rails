@@ -7,17 +7,17 @@ class LoginsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       log_in_user user
-      flash[:success] = "You are logged in."
+      flash[:success] = 'You are logged in.'
       redirect_to recipes_path
     else
-      flash.now[:danger] = "Invalid Email Address or Password."
+      flash.now[:danger] = 'Invalid Email Address or Password.'
       render :new
     end
   end
 
   def destroy
     log_out_user if logged_in?
-    flash[:success] = "You have logged out."
+    flash[:success] = 'You have logged out.'
     redirect_to root_path
   end
 end

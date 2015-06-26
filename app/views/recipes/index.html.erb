@@ -22,8 +22,8 @@
     <div class="col-md-6 well">
       <h4><%= link_to recipe.name, recipe %></h4>
       <p><%= recipe.summary %></p>
-      <p>Style: <%= render recipe.styles %></p>
-      <p>Ingredients: <%= render recipe.ingredients %></p>
+      <p><span class="style-ing">Style:</span><%= render recipe.styles %></p>
+      <p><span class="style-ing">Ingredients:</span><%= render recipe.ingredients %></p>
       <p>
         <% if recipe.created_at == recipe.updated_at %>
           <span class="quiet"><small>Created <%= time_ago_in_words recipe.created_at %> ago</small></span>
@@ -33,19 +33,11 @@
         <% end %>
       </p>
       <div class="pull-right">
-        <% if logged_in? %>
-          <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
-            <i class="glyphicon glyphicon-thumbs-up"></i> <%= recipe.thumbs_up %>
-          <% end %>
-        <% else %>
+        <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
           <i class="glyphicon glyphicon-thumbs-up"></i> <%= recipe.thumbs_up %>
         <% end %>
         &nbsp;&nbsp;
-        <% if logged_in? %>
-          <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
-            <i class="glyphicon glyphicon-thumbs-down"></i> <%= recipe.thumbs_down %>
-          <% end %>
-        <% else %>
+        <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
           <i class="glyphicon glyphicon-thumbs-down"></i> <%= recipe.thumbs_down %>
         <% end %>
       </div>

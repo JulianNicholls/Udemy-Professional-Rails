@@ -4,7 +4,7 @@ class StylesController < ApplicationController
   def show
     @style = Style.find params[:id]
     @recipes = @style.recipes.paginate(page: params[:page], per_page: 4)
-end
+  end
 
   def new
     @style = Style.new
@@ -14,7 +14,7 @@ end
     @style = Style.new style_params
 
     if @style.save
-      flash[:success] = "Style created Successfully"
+      flash[:success] = 'Style created Successfully'
       redirect_to recipes_path
     else
       render :new

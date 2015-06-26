@@ -1,5 +1,4 @@
 class Recipe < ActiveRecord::Base
-
   belongs_to :chef
 
   has_many :likes
@@ -31,8 +30,8 @@ class Recipe < ActiveRecord::Base
   private
 
     def picture_size
-      if picture.size > 5.megabytes
-        errors.add :picture, "The picture should be smaller than 5MB"
-      end
+      return unless picture.size > 5.megabytes
+
+      errors.add :picture, 'The picture should be smaller than 5MB'
     end
 end

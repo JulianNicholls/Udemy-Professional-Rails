@@ -1,3 +1,4 @@
+# Functions to do with users
 module LoginsHelper
   def current_user
     @current_user ||= Chef.find(session[:user_id]) if session[:user_id]
@@ -21,9 +22,9 @@ module LoginsHelper
   end
 
   def require_user
-    unless logged_in?
-      flash[:danger] = "You must be logged in to perform that action"
-      redirect_to recipes_path
-    end
+    return if logged_in?
+
+    flash[:danger] = 'You must be logged in to perform that action'
+    redirect_to recipes_path
   end
 end

@@ -1,5 +1,5 @@
 class ChefsController < ApplicationController
-  before_action :set_chef, only: [:show, :edit, :update]    # I'm not sure about this
+  before_action :set_chef, only: [:show, :edit, :update]
   before_action :require_same_user, only: [:edit, :update]
 
   def index
@@ -18,7 +18,7 @@ class ChefsController < ApplicationController
     @chef = Chef.new chef_params
 
     if @chef.save
-      flash[:success] = "Your Account was Registered Successfully"
+      flash[:success] = 'Your Account was Registered Successfully'
       log_in_user @chef
       redirect_to recipes_path
     else
@@ -41,7 +41,8 @@ class ChefsController < ApplicationController
   private
 
     def chef_params
-      params.require(:chef).permit :name, :email, :profile, :password, :password_confirmation
+      params.require(:chef).permit :name, :email, :profile, :password,
+                                   :password_confirmation
     end
 
     def set_chef
@@ -49,9 +50,9 @@ class ChefsController < ApplicationController
     end
 
     def require_same_user
-      unless current_user? @chef
-        flash[:danger] = "You can only edit your own profile."
-        redirect_to root_path
-      end
+      return if current_user? @chef
+
+      flash[:danger] = 'You can only edit your own profile.'
+      redirect_to root_path
     end
 end

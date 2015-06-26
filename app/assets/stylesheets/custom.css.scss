@@ -7,6 +7,7 @@ $navbar-default-color: $light-orange;
 
 body {
     padding-top: 90px;
+    background-image: url('/assets/train.jpg')
 }
 
 header {
@@ -113,4 +114,9 @@ span.picture {
 
 .show_recipe {
     margin: 10px;
+}
+
+span.style-ing {
+    display: inline-block;
+    width: 6em;
 }

@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
     @recipe.chef = current_user
 
     if @recipe.save
-      flash[:success] = "Your Recipe was Created Successfully"
+      flash[:success] = 'Your Recipe was Created Successfully'
       redirect_to recipes_path
     else
       render :new
@@ -32,21 +32,20 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update recipe_params
-      flash[:success] = "Your Recipe was Updated Successfully"
+      flash[:success] = 'Your Recipe was Updated Successfully'
       redirect_to @recipe
     else
       render :edit
     end
   end
 
-
   def like
     like = Like.create(like: params[:like], recipe: @recipe, chef: current_user)
 
     if like.valid?
-      flash[:success] = "Your selection was successful"
+      flash[:success] = 'Your selection was successful'
     else
-      flash[:danger] = "You can only vote on a recipe once"
+      flash[:danger] = 'You can only vote on a recipe once'
     end
 
     redirect_to :back
@@ -55,7 +54,8 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit :name, :summary, :description, :picture, style_ids: [], ingredient_ids: []
+      params.require(:recipe).permit :name, :summary, :description, :picture,
+                                     style_ids: [], ingredient_ids: []
     end
 
     def set_recipe
@@ -63,16 +63,16 @@ class RecipesController < ApplicationController
     end
 
     def require_user_like
-      unless logged_in?
-        flash[:danger] = "You must be logged in to perform that action"
-        redirect_to :back
-      end
+      return if logged_in?
+
+      flash[:danger] = 'You must be logged in to perform that action'
+      redirect_to :back
     end
 
     def require_same_user
-      unless current_user? @recipe.chef
-        flash[:danger] = "You can only edit your own recipes"
-        redirect_to recipes_path
-      end
+      return if current_user? @recipe.chef
+
+      flash[:danger] = 'You can only edit your own recipes'
+      redirect_to recipes_path
     end
 end
