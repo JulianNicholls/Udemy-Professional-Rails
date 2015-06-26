@@ -1,8 +1,9 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :like]
+  before_action :set_recipe, only: [:show, :edit, :update, :like, :destroy]
   before_action :require_user, except: [:index, :show, :like]
   before_action :require_user_like, only: [:like]
   before_action :require_same_user_or_admin, only: [:edit, :update]
+  before_action :require_admin_user, only: :destroy
 
   def index
     @recipes = Recipe.paginate page: params[:page], per_page: 4
@@ -39,6 +40,13 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    @recipe.destroy
+
+    flash[:success] = "Recipe Removed"
+    redirect_to recipes_path
+  end
+
   def like
     like = Like.create(like: params[:like], recipe: @recipe, chef: current_user)
 
@@ -73,6 +81,13 @@ class RecipesController < ApplicationController
       return if current_user?(@recipe.chef) || current_user.admin?
 
       flash[:danger] = 'You can only edit your own recipes'
+      redirect_to recipes_path
+    end
+
+    def require_admin_user
+      return if current_user.admin?
+
+      flash[:danger] = 'Only admins can delete Recipes.'
       redirect_to recipes_path
     end
 end
