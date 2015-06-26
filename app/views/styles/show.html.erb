@@ -11,13 +11,7 @@
 
 <%= will_paginate @recipes %>
 
-<% if @recipes.count == 0 %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2 center">
-      <h2>There are no <%= @style.name %> recipes at the moment. Why not create one?</h2>
-    </div>
-  </div>
-<% else %>
+<% if @recipes.any? %>
   <% @recipes.each do |recipe| %>
     <div class="row">
       <div class="col-md-2">
@@ -63,6 +57,12 @@
     </div>
     <hr/>
   <% end %>
+<% else %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 center">
+      <h2>There are no <%= @style.name %> recipes at the moment. Why not have a go at creating one?</h2>
+    </div>
+  </div>
 <% end %>
 
 <%= will_paginate @recipes %>
