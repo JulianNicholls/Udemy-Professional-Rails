@@ -1,0 +1,14 @@
+<% if current_user && current_user.admin %>
+  <div class="btn-group pull-right">
+    <%= link_to edit_recipe_path(@recipe), class: 'btn btn-success' do %>
+      <i class="glyphicon glyphicon-edit"></i> Edit this Recipe
+    <% end %>
+    <%= link_to @recipe, method: :delete, data: { confirm: 'Are you Sure?' }, class: 'btn btn-danger' do %>
+      <i class="glyphicon glyphicon-trash"></i> Delete this Recipe
+    <% end %>
+  </div>
+<% elsif current_user? @recipe.chef %>
+  <%= link_to edit_recipe_path(@recipe), class: 'btn btn-success pull-right' do %>
+    <i class="glyphicon glyphicon-edit"></i> Edit this Recipe
+  <% end %>
+<% end %>

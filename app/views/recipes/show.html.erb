@@ -9,15 +9,7 @@
   </div>
 
   <div class="col-md-8">
-    <% if current_user?(@recipe.chef) || current_user.admin? %>
-      <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: 'btn btn-success pull-right' %>
-    <% end %>
-
-    <% if current_user.admin? %>
-      <%= link_to 'Delete this Recipe', @recipe, method: :delete,
-                  data: { confirm: 'Are you Sure?' }, class: 'btn btn-danger pull-right' %>
-    <% end %>
-
+    <%= render 'update_links' %>
     <h3><%= @recipe.summary %></h3>
 
     <div class="show_recipe">

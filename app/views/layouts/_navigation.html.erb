@@ -12,7 +12,11 @@
           <% end %>
           <% if logged_in? %>
             <li class="divider"></li>
-            <li><%= link_to 'New Style', new_style_path %></li>
+            <li>
+              <%= link_to new_style_path  do %>
+                <i class="glyphicon glyphicon-plus-sign"></i> New Style
+              <% end %>
+            </li>
           <% end %>
         </ul>
       </li>
@@ -28,14 +32,20 @@
           <% end %>
           <% if logged_in? %>
             <li class="divider"></li>
-            <li><%= link_to 'New Ingredient', new_ingredient_path %></li>
+            <li>
+              <%= link_to new_ingredient_path do %>
+                <i class="glyphicon glyphicon-plus-sign"></i> New Ingredient
+              <% end %>
+            </li>
           <% end %>
         </ul>
       </li>
     </ul>
     <% if logged_in? %>
       <div class='nav-ul-item'>
-        <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-default btn-warning' %>
+        <%= link_to new_recipe_path, class: 'btn btn-default btn-warning' do %>
+          <i class="glyphicon glyphicon-plus-sign"></i> New Recipe
+        <% end %>
       </div>
       <ul class="nav-ul-item">
         <li class="dropdown">
