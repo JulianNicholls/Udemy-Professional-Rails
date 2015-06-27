@@ -41,19 +41,51 @@
   </div>
 </div>
 
-<!--  There will be a list of reviews here, but we'll need some first -->
+<% if @recipe.reviews.any? %>
+  <div class="row">
+    <div class="col-md-8">
+      <h3 class="center">Reviews</h3>
+    </div>
+  </div>
 
-<% if logged_in? %>
+  <% @recipe.reviews.each do |rev| %>
+    <div class="row">
+      <div class="col-md-2">
+        Rating:&nbsp;
+        <% rev.rating.times do %>
+          <i class="glyphicon glyphicon-star"></i>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= simple_format rev.body %>
+      </div>
+      <% if logged_in? && (current_user?(rev.chef) || current_user.admin?) %>
+        <div class="col-md-2 btn-group">
+          <%= link_to edit_review_path(rev), class: "btn btn-success" do %>
+            <i class="glyphicon glyphicon-edit"></i> Edit
+          <% end %>
+          <%= link_to rev, method: :delete, data: { confirm: 'Are you Sure?' }, class: "btn btn-danger" do %>
+            <i class="glyphicon glyphicon-trash"></i> Delete
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <hr/>
+  <% end %>
+<% end %>
+
+<% if logged_in? && !current_user?(@recipe.chef) %>
   <div class="row">
     <div class="col-md-8 well">
-      <h2>New Review</h2>
+      <h3 class="center">New Review</h3>
       <%= form_for @review do |f| -%>
         <%= f.hidden_field :recipe_id %>
         <%= f.label :rating, "Rating" %>
-        <%= f.select :rating, [['Troll', 1], ['Dreadful', 2], ['Acceptable', 3],
-                               ['Exceeds Expectations', 4], ['Outstanding', 5]], { selected: 5 } %>
+        <%= f.select :rating, [['Dreadful', 1], ['Poor', 2], ['Acceptable', 3],
+                               ['Exceeds Expectations', 4], ['Outstanding', 5]],
+                              { selected: 5 } %>
         <%= f.label :body, "Comments" %>
-        <%= f.text_area :body, rows: 2 %>
+        <%= f.text_area :body, rows: 5 %>
         <%= f.submit "Submit", class: 'btn btn-success' %>
       <% end -%>
     </div>
