@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     flash[:success] = "The Review has been Deleted Successfully"
+    redirect_to :back
   end
 
   private
