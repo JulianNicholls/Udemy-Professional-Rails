@@ -61,7 +61,7 @@
       </div>
       <% if logged_in? && (current_user?(rev.chef) || current_user.admin?) %>
         <div class="col-md-2 btn-group">
-          <%= link_to edit_review_path(rev), class: "btn btn-success" do %>
+          <%= link_to edit_review_path(rev), class: "btn btn-primary" do %>
             <i class="glyphicon glyphicon-edit"></i> Edit
           <% end %>
           <%= link_to rev, method: :delete, data: { confirm: 'Are you Sure?' }, class: "btn btn-danger" do %>
