@@ -2,33 +2,67 @@
 
 <div class="row">
   <div class="well col-md-8 col-md-offset-2">
-    <%= form_for(@recipe, html: { multipart: true }) do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+    <%= form_for(@recipe, html: { multipart: true }, class: 'form-horizontal') do |f| %>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <%= f.label :name %>
+        </div>
+        <div class="col-sm-10">
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
 
-      <%= f.label :summary %>
-      <%= f.text_field :summary %>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <%= f.label :summary %>
+        </div>
+        <div class="col-sm-10">
+          <%= f.text_field :summary, class: 'form-control' %>
+        </div>
+      </div>
 
-      <%= f.label :description %>
-      <%= f.text_area :description, rows: 10 %>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <%= f.label :description %>
+        </div>
+        <div class="col-sm-10">
+          <%= f.text_area :description, rows: 10, class: 'form-control' %>
+        </div>
+      </div>
 
-      <strong><span class="style-ing">Styles:</span></strong>
-      <%= f.collection_check_boxes :style_ids, Style.all, :id, :name do |cb| %>
-        <%= cb.label(class: 'checkbox-inline input_checkbox') { cb.check_box(class: 'checkbox') + cb.text } %>
-      <% end %>
-      <br/>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <strong>Styles</strong>
+        </div>
+        <div class="col-sm-10">
+          <%= f.collection_check_boxes :style_ids, Style.all, :id, :name do |cb| %>
+            <%= cb.label(class: 'checkbox-inline input_checkbox') { cb.check_box(class: 'checkbox form-control') + cb.text } %>
+          <% end %>
+        </div>
+      </div>
 
-      <strong><span class="style-ing">Ingredients:</span></strong>
-      <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name do |cb| %>
-        <%= cb.label(class: 'checkbox-inline input_checkbox') { cb.check_box(class: 'checkbox') + cb.text } %>
-      <% end %>
-      <br/><br/>
+      <div class="form-group">
+        <div class="col-sm-2">
+          <strong>Ingredients</strong>
+        </div>
+        <div class="col-sm-10">
+          <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name do |cb| %>
+            <%= cb.label(class: 'checkbox-inline input_checkbox') { cb.check_box(class: 'checkbox form-control') + cb.text } %>
+          <% end %>
+        </div>
+      </div>
 
-      <span class="picture">
-        <%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png' %>
-      </span>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png', class: 'form-control' %>
+        </div>
+      </div>
 
-      <%= f.submit(@recipe.new_record? ? 'Create Recipe' : 'Update Recipe', class: 'btn btn-success') %>
+      <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-2">
+          <%= f.submit(@recipe.new_record? ? 'Create Recipe' : 'Update Recipe', class: 'btn btn-success') %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

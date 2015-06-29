@@ -45,16 +45,32 @@
   <div class="row">
     <div class="col-md-8 well">
       <h3 class="center">New Review</h3>
-      <%= form_for @review do |f| -%>
+      <%= form_for @review, class: 'form-horizontal' do |f| %>
         <%= f.hidden_field :recipe_id %>
-        <%= f.label :rating, "Rating" %>
-        <%= f.select :rating, [['Dreadful', 1], ['Poor', 2], ['Acceptable', 3],
-                               ['Exceeds Expectations', 4], ['Outstanding', 5]],
-                              { selected: 5 } %>
-        <%= f.label :body, "Comments" %>
-        <%= f.text_area :body, rows: 5 %>
-        <%= f.submit "Submit", class: 'btn btn-success' %>
-      <% end -%>
+        <div class="form-group">
+          <div class="col-sm-2">
+            <%= f.label :rating, "Rating" %>
+          </div>
+          <div class="col-sm-10">
+            <%= f.select :rating, [['Outstanding', 5], ['Exceeds Expectations', 4],
+                                   ['Acceptable', 3], ['Poor', 2], ['Dreadful', 1]],
+                                  { selected: 5 } %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-2">
+            <%= f.label :body, "Comments" %>
+          </div>
+          <div class="col-sm-10">
+            <%= f.text_area :body, rows: 5 %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-2 col-sm-offset-2">
+            <%= f.submit "Submit", class: 'btn btn-success' %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
@@ -79,10 +95,7 @@
         <%= simple_format rev.body %>
       </div>
       <% if logged_in? && (current_user?(rev.chef) || current_user.admin?) %>
-        <div class="col-md-2 btn-group">
-          <%= link_to edit_review_path(rev), class: "btn btn-primary" do %>
-            <i class="glyphicon glyphicon-edit"></i> Edit
-          <% end %>
+        <div class="col-md-2">
           <%= link_to rev, method: :delete, data: { confirm: 'Are you Sure?' }, class: "btn btn-danger" do %>
             <i class="glyphicon glyphicon-trash"></i> Delete
           <% end %>
