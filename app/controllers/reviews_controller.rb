@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :require_user_or_admin, only: [:edit, :update, :destroy]
+  before_action :require_user_or_admin, only: :destroy
 
   def create
     @review = current_user.reviews.build review_params
@@ -14,16 +13,8 @@ class ReviewsController < ApplicationController
     redirect_to :back
   end
 
-  def edit
-  end
-
-  def update
-    @review.update review_params
-    binding.pry
-  end
-
   def destroy
-    @review.destroy
+    Review.find params[:id].destroy
     flash[:success] = "The Review has been Deleted Successfully"
     redirect_to :back
   end
@@ -32,10 +23,6 @@ class ReviewsController < ApplicationController
 
     def review_params
       params.require(:review).permit :recipe_id, :rating, :body
-    end
-
-    def set_review
-      @review = Review.find params[:id]
     end
 
     def require_user_or_admin
