@@ -73,7 +73,7 @@ class RecipesController < ApplicationController
     def require_user_like
       return if logged_in?
 
-      flash[:danger] = 'You must be logged in to perform that action'
+      flash[:danger] = 'You must be signed in to perform that action'
       redirect_to :back
     end
 
