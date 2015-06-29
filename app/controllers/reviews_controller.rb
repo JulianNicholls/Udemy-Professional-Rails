@@ -3,8 +3,7 @@ class ReviewsController < ApplicationController
   before_action :require_user_or_admin, only: [:edit, :update, :destroy]
 
   def create
-    @review = Review.new review_params
-    @review.chef = current_user
+    @review = current_user.reviews.build review_params
 
     if @review.save
       flash[:success] = "Your Review has been Saved Successfully"

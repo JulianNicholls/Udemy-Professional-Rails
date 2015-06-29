@@ -41,7 +41,25 @@
   </div>
 </div>
 
-<% if @recipe.reviews.any? %>
+<% if logged_in? && !current_user?(@recipe.chef) %>
+  <div class="row">
+    <div class="col-md-8 well">
+      <h3 class="center">New Review</h3>
+      <%= form_for @review do |f| -%>
+        <%= f.hidden_field :recipe_id %>
+        <%= f.label :rating, "Rating" %>
+        <%= f.select :rating, [['Dreadful', 1], ['Poor', 2], ['Acceptable', 3],
+                               ['Exceeds Expectations', 4], ['Outstanding', 5]],
+                              { selected: 5 } %>
+        <%= f.label :body, "Comments" %>
+        <%= f.text_area :body, rows: 5 %>
+        <%= f.submit "Submit", class: 'btn btn-success' %>
+      <% end -%>
+    </div>
+  </div>
+<% end %>
+
+<% if @recipe.reviews.any? %>  <!-- There'll always be 1, the new one. -->
   <div class="row">
     <div class="col-md-8">
       <h3 class="center">Reviews</h3>
@@ -49,6 +67,7 @@
   </div>
 
   <% @recipe.reviews.each do |rev| %>
+    <% next if rev.body.blank? %>
     <div class="row">
       <div class="col-md-2">
         Rating:&nbsp;
@@ -72,24 +91,6 @@
     </div>
     <hr/>
   <% end %>
-<% end %>
-
-<% if logged_in? && !current_user?(@recipe.chef) %>
-  <div class="row">
-    <div class="col-md-8 well">
-      <h3 class="center">New Review</h3>
-      <%= form_for @review do |f| -%>
-        <%= f.hidden_field :recipe_id %>
-        <%= f.label :rating, "Rating" %>
-        <%= f.select :rating, [['Dreadful', 1], ['Poor', 2], ['Acceptable', 3],
-                               ['Exceeds Expectations', 4], ['Outstanding', 5]],
-                              { selected: 5 } %>
-        <%= f.label :body, "Comments" %>
-        <%= f.text_area :body, rows: 5 %>
-        <%= f.submit "Submit", class: 'btn btn-success' %>
-      <% end -%>
-    </div>
-  </div>
 <% end %>
 
 <h5><%= link_to 'Return to Recipes Listing', recipes_path, class: 'btn btn-warning btn-small' %></h5>

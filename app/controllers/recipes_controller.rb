@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @review = Review.new recipe_id: @recipe.id
+    @review = @recipe.reviews.build
   end
 
   def new
@@ -18,8 +18,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new recipe_params
-    @recipe.chef = current_user
+    @recipe = current_user.recipes.build recipe_params
 
     if @recipe.save
       flash[:success] = 'Your Recipe was Created Successfully'
