@@ -1,4 +1,4 @@
-<% if current_user && current_user.admin %>
+<% if current_user && current_user.admin? %>
   <div class="btn-group pull-right">
     <%= link_to edit_recipe_path(@recipe), class: 'btn btn-primary' do %>
       <i class="glyphicon glyphicon-edit"></i> Edit this Recipe

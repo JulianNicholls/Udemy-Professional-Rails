@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @review = @recipe.reviews.build
+    @review = @recipe.reviews.new
   end
 
   def new
