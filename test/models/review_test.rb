@@ -1,9 +1,11 @@
 require 'test_helper'
 
+# Tests for reviews
 class ReviewTest < ActiveSupport::TestCase
   def setup
     # @chef = Chef.new
-    @review = Review.new rating: 5, body: "Mmm tasty, but I need to say a little more than that",
+    @review = Review.new rating: 5,
+                         body: 'Mmm, tasty, but I need to say more than that',
                          recipe_id: 1, chef_id: 1
   end
 

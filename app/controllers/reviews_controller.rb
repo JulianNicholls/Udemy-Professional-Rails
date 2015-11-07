@@ -1,3 +1,4 @@
+# Controller for recipe reviews
 class ReviewsController < ApplicationController
   before_action :require_user_or_admin, only: :destroy
 
@@ -21,14 +22,14 @@ class ReviewsController < ApplicationController
 
   private
 
-    def review_params
-      params.require(:review).permit :recipe_id, :rating, :body
-    end
+  def review_params
+    params.require(:review).permit :recipe_id, :rating, :body
+  end
 
-    def require_user_or_admin
-      return if current_user?(@review.chef) || current_user.admin?
+  def require_user_or_admin
+    return if current_user?(@review.chef) || current_user.admin?
 
-      flash[:danger] = 'You can only update your own reviews'
-      redirect_to recipes_path
-    end
+    flash[:danger] = 'You can only update your own reviews'
+    redirect_to recipes_path
+  end
 end

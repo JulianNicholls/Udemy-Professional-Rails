@@ -43,7 +43,7 @@ class ChefTest < ActiveSupport::TestCase
     copy = @chef.dup
     @chef.save
 
-    copy.email.upcase!    # Ensure case-insensitivity
+    copy.email.upcase! # Ensure case-insensitivity
     assert_not copy.valid?
   end
 

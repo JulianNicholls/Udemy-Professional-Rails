@@ -1,3 +1,4 @@
+# Controller for recipe styles
 class StylesController < ApplicationController
   before_action :require_user, except: [:show]
 
@@ -23,7 +24,7 @@ class StylesController < ApplicationController
 
   private
 
-    def style_params
-      params.require(:style).permit :name
-    end
+  def style_params
+    params.require(:style).permit :name
+  end
 end

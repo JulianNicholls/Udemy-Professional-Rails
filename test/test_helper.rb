@@ -2,6 +2,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+require 'minitest/reporters'
+
+MiniTest::Reporters.use!
+
 module ActiveSupport
   # Class to help common helper functions
   class TestCase

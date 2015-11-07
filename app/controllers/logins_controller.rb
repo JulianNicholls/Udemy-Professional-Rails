@@ -1,3 +1,4 @@
+# Controller for login
 class LoginsController < ApplicationController
   def new
   end
@@ -10,7 +11,7 @@ class LoginsController < ApplicationController
       flash[:success] = 'You are signed in.'
       redirect_to recipes_path
     else
-      flash.now[:danger] = 'Invalid Email Address or Password.'
+      flash.now[:danger] = 'Your email or password were not recognised.'
       render :new
     end
   end

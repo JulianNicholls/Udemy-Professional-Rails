@@ -1,3 +1,4 @@
+# Controller for recipe ingredients
 class IngredientsController < ApplicationController
   before_action :require_user, except: [:show]
 
@@ -23,7 +24,7 @@ class IngredientsController < ApplicationController
 
   private
 
-    def ingredient_params
-      params.require(:ingredient).permit :name
-    end
+  def ingredient_params
+    params.require(:ingredient).permit :name
+  end
 end

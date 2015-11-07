@@ -1,3 +1,4 @@
+# Controller for chefs
 class ChefsController < ApplicationController
   before_action :set_chef, only: [:show, :edit, :update]
   before_action :require_same_user, only: [:edit, :update]
@@ -40,19 +41,19 @@ class ChefsController < ApplicationController
 
   private
 
-    def chef_params
-      params.require(:chef).permit :name, :email, :profile, :password,
-                                   :password_confirmation
-    end
+  def chef_params
+    params.require(:chef).permit :name, :email, :profile, :password,
+                                 :password_confirmation
+  end
 
-    def set_chef
-      @chef = Chef.find params[:id]
-    end
+  def set_chef
+    @chef = Chef.find params[:id]
+  end
 
-    def require_same_user
-      return if current_user? @chef
+  def require_same_user
+    return if current_user? @chef
 
-      flash[:danger] = 'You can only edit your own profile.'
-      redirect_to root_path
-    end
+    flash[:danger] = 'You can only edit your own profile.'
+    redirect_to root_path
+  end
 end

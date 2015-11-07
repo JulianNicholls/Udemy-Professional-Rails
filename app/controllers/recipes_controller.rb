@@ -1,3 +1,4 @@
+# controller for recipes
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :like, :destroy]
   before_action :require_user, except: [:index, :show, :like]
@@ -43,7 +44,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
 
-    flash[:success] = "Recipe Removed"
+    flash[:success] = 'The recipe has been removed successfully'
     redirect_to recipes_path
   end
 
@@ -61,33 +62,33 @@ class RecipesController < ApplicationController
 
   private
 
-    def recipe_params
-      params.require(:recipe).permit :name, :summary, :description, :picture,
-                                     style_ids: [], ingredient_ids: []
-    end
+  def recipe_params
+    params.require(:recipe).permit :name, :summary, :description, :picture,
+                                   style_ids: [], ingredient_ids: []
+  end
 
-    def set_recipe
-      @recipe = Recipe.find params[:id]
-    end
+  def set_recipe
+    @recipe = Recipe.find params[:id]
+  end
 
-    def require_user_like
-      return if logged_in?
+  def require_user_like
+    return if logged_in?
 
-      flash[:danger] = 'You must be signed in to perform that action'
-      redirect_to :back
-    end
+    flash[:danger] = 'You must be signed in to perform that action'
+    redirect_to :back
+  end
 
-    def require_same_user_or_admin
-      return if current_user?(@recipe.chef) || current_user.admin?
+  def require_same_user_or_admin
+    return if current_user?(@recipe.chef) || current_user.admin?
 
-      flash[:danger] = 'You can only edit your own recipes'
-      redirect_to recipes_path
-    end
+    flash[:danger] = 'You can only edit your own recipes'
+    redirect_to recipes_path
+  end
 
-    def require_admin_user
-      return if current_user.admin?
+  def require_admin_user
+    return if current_user.admin?
 
-      flash[:danger] = 'Only admins can delete Recipes.'
-      redirect_to recipes_path
-    end
+    flash[:danger] = 'Only admins can delete Recipes.'
+    redirect_to recipes_path
+  end
 end
