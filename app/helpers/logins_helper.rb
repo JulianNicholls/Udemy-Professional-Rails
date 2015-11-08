@@ -1,7 +1,8 @@
 # Functions to do with users
 module LoginsHelper
   def current_user
-    @current_user ||= Chef.find(session[:user_id]) if session[:user_id]
+    id = session[:user_id]
+    @current_user ||= Chef.find(id) if id
   end
 
   def logged_in?
