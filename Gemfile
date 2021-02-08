@@ -21,7 +21,7 @@ end
 # Project-specific from here
 
 gem 'bootstrap-sass', '~> 3.4.1'
-gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave', '~> 1.3.2'
 gem 'mini_magick', '~> 4.9.4'
 gem 'will_paginate', '~> 3.0.7'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
